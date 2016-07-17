@@ -1,0 +1,43 @@
+package com.example.mdmamunhossain.sharedpref;
+
+import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+    EditText editText;
+    TextView textView;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        editText = (EditText)findViewById(R.id.etTxt);
+        textView = (TextView)findViewById(R.id.tvTxt);
+        sharedPreferences =getApplicationContext().getSharedPreferences("mamun",MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+       // editText.getText().toString();
+       /* editor.putString("name",editText.getText().toString());
+        editor.commit();
+*/
+
+
+    }
+    public void save(View v){
+
+        editor.putString("name",editText.getText().toString());
+        editor.commit();
+
+    }
+    public void show(View v){
+
+        textView.setText(sharedPreferences.getString("name","Data not found"));
+
+
+    }
+}
